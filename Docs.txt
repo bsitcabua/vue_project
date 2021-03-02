@@ -1,5 +1,6 @@
 Vue directives
 
-v-text/{{ var }}: print the string value
-v-html: print as html
-v-for: for loop
+v-text/{{ var }} - print the string value
+v-html - print as html
+v-for - for loop
+v-on:click / @click - onClick event

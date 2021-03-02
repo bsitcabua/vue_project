@@ -26,12 +26,15 @@
             <li v-for="el in info_set">{{ el }}</li>
         </ul> -->
 
-        <ul v-for="el in info_set">
+        <!-- <ul v-for="el in info_set"> -->
             <!-- el is json data now -->
-            <li>{{el.brand}}</li>
-            <li>{{el.model}}</li>
-        </ul>
+            <!-- <li>{{el.brand}}</li>
+            <li>{{el.model}}</li> -->
+        <!-- </ul> -->
+        <!-- <button @click="sayHi('Hey')">Click Me</button> -->
 
+        <span>{{ message }}</span>
+        <button @click="message =! message">Click Me</button>
     </div>
 
     <script type="text/javascript">
@@ -65,7 +68,18 @@
         // Instantiate the vue class
         var vm = new Vue ({
             el:'#app',
-            data:model
+            // data:model,
+            data: {
+                message: true,
+            },
+            methods: {
+                output: function(){
+                    alert(this.message);
+                },
+                sayHi: function(message){
+                    alert(message);
+                }
+            },
         });
 
     </script>
