@@ -1,0 +1,5 @@
+Vue directives
+
+v-text/{{ var }}: print the string value
+v-html: print as html
+v-for: for loop

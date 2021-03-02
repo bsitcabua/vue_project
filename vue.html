@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Project</title>
+    <style>
+        h1,div,p,span{
+            font-size: 33px; font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <script text="text/javascript" src="vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <!-- <p>Test name <span v-text='name'></span></p> -->
+        <!-- {{ name }} can give us flexibility than v-text -->
+        <!-- <p>Test name <span v-html='name'></span></p>
+        <img src="img/vue_logo.png" alt="Vue Logo">
+        <br/>
+        <img v-bind:src='logo' v-bind:title='title'> -->
+
+        <!-- <ul>
+            <li v-for="el in info_set">{{ el }}</li>
+        </ul> -->
+
+        <ul v-for="el in info_set">
+            <!-- el is json data now -->
+            <li>{{el.brand}}</li>
+            <li>{{el.model}}</li>
+        </ul>
+
+    </div>
+
+    <script type="text/javascript">
+
+        // var model = {
+        //     name:'<b>EM Cabua</b>',
+        //     logo:'img/vue_logo.png',
+        //     title:'Vue logo',
+        // }
+
+        // var model = {
+        //     info_set: [
+        //         'first',
+        //         'second',
+        //         'third',
+        //         'fourt',
+        //         'fifth',
+        //         'sixth'
+        //     ],
+        // }
+
+        var model = {
+            info_set: [
+                {brand:'Toyota', model:'2011'},
+                {brand:'Yamaha', model:'2012'},
+                {brand:'Suzuki', model:'2013'},
+                {brand:'Rusi', model:'2014'},
+            ]
+        }
+
+        // Instantiate the vue class
+        var vm = new Vue ({
+            el:'#app',
+            data:model
+        });
+
+    </script>
+    
+</body>
+</html>
