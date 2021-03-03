@@ -1,0 +1,9 @@
+Vue directives
+
+v-text/{{ var }} - print the string value
+v-html - print as html
+v-for - for loop
+v-on:click / @click - onClick event
+v-model - for input tag realtime update
+v-model.lazy - equivalent to onChange Value
+v-model.number - number type value

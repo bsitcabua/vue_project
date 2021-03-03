@@ -9,6 +9,7 @@
         h1,div,p,span{
             font-size: 33px; font-family: Arial, Helvetica, sans-serif;
         }
+        span{color: red;}
     </style>
     <script text="text/javascript" src="vue.js"></script>
 </head>
@@ -33,8 +34,24 @@
         <!-- </ul> -->
         <!-- <button @click="sayHi('Hey')">Click Me</button> -->
 
-        <span>{{ message }}</span>
-        <button @click="message =! message">Click Me</button>
+        <!-- <span>{{ message }}</span>
+        <button @click="message =! message">Click Me</button> -->
+
+        <!-- <input v-model.number="message" type="text" /> -->
+        <!-- <textarea v-model.lazy="message" id="" cols="30" rows="10"></textarea> -->
+        <!-- <span>Apple</span><input type="checkbox" value="Apple" v-model="message">
+        <span>Orange</span><input type="checkbox" value="Orange" v-model="message">
+        <span>Peach</span><input type="checkbox" value="Peach" v-model="message"> -->
+        <!-- <select v-model="message">
+            <option v-for="el in info_set" v-bind:value="el.value">{{ el.text }}</option>
+        </select> -->
+        <label for="">First Name:</label>
+        <input v-model="first_name" type="text" />
+        <label for="">Last Name:</label>
+        <input v-model="last_name" type="text" />
+        <!-- <p v-bind:title="title | capitalized">Processed value: <span v-bind:title="message | capitalized">{{ message | capitalized | shorthenString }}</span></p> -->
+        <!-- <p v-bind:title="title | capitalized">Processed value: <span v-bind:title="message | capitalized">{{ computedMessage | capitalized | shorthenString }}</span></p> -->
+        <p v-bind:title="title | capitalized">Full Name: <span v-bind:title="message | capitalized">{{ computedFullName }}</span></p>
     </div>
 
     <script type="text/javascript">
@@ -56,21 +73,43 @@
         //     ],
         // }
 
-        var model = {
-            info_set: [
-                {brand:'Toyota', model:'2011'},
-                {brand:'Yamaha', model:'2012'},
-                {brand:'Suzuki', model:'2013'},
-                {brand:'Rusi', model:'2014'},
-            ]
-        }
+        // info_set: [
+        //             {value:'Toyota', text:'Toyota 2011'},
+        //             {value:'Yamaha', text:'Yamaha 2012'},
+        //             {value:'Suzuki', text:'Suzuki 2013'},
+        //             {value:'Rusi', text:'Rusi 2014'},
+        //         ]
+
 
         // Instantiate the vue class
         var vm = new Vue ({
             el:'#app',
             // data:model,
             data: {
-                message: true,
+                message: 'Message set in data',
+                title: 'title set in title attribute',
+                first_name: '',
+                last_name: '',
+            },
+            filters: {
+                capitalized: function(value){
+                    return value.toUpperCase();
+                },
+                shorthenString: function(value) {
+                    var num = 10;
+                    if( !value || value.length <= num) {
+                        return value;
+                    }
+                    return value.slice(0, num) + '...'
+                }
+            },
+            computed: {
+                computedMessage: function(){
+                    return this.message.split('').reverse().join('');
+                },
+                computedFullName: function(){
+                    return this.first_name + ' ' + this.last_name;
+                }
             },
             methods: {
                 output: function(){
