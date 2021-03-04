@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Component</title>
+    <style>
+        .comp_root{
+            background: red; color: white;
+        }
+    </style>
+    <script text="text/javascript" src="vue.js"></script>
+</head>
+<body>
+
+    <div id="app1">
+        <p>V1</p>
+        <simple_comp></simple_comp>
+    </div>
+    <hr/>
+    <div id="app2">
+        <p>V2</p>
+        <simple_comp></simple_comp>
+    </div>
+
+    <template id="temp">
+        <div class="comp_root">
+            <p>This is a component</p>
+            <p>{{ message }}</p>
+        </div>
+    </template>
+
+    <script type="text/javascript">
+        // Register a global component 
+        // data in component must be an anonymous function
+        // Vue.component('simple_comp', {
+        //     template:'#temp',
+        //     data: function(){
+        //         return{
+        //             message: 'Component message',
+        //         }
+        //     },
+        //     props:[],
+        //     methods: {
+        //     },
+        // });
+
+        // Instantiate the vue class
+        var vm1 = new Vue ({
+            el:'#app1',
+            // Register a local component
+            components: {
+                simple_comp: { // component name
+                    template: '#temp',
+                    data: function(){
+                        return{
+                            message: 'Component message',
+                        }
+                    },
+                    props:[],
+                    methods: {
+                    },
+                }
+            }
+        });
+
+        var vm2 = new Vue ({
+            el:'#app2',
+        });
+
+    </script>
+    
+</body>
+</html>

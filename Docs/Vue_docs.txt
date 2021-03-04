@@ -7,3 +7,4 @@ v-on:click / @click - onClick event
 v-model - for input tag realtime update
 v-model.lazy - equivalent to onChange Value
 v-model.number - number type value
+v-on:input - trigger every changes input data

@@ -45,13 +45,18 @@
         <!-- <select v-model="message">
             <option v-for="el in info_set" v-bind:value="el.value">{{ el.text }}</option>
         </select> -->
-        <label for="">First Name:</label>
+        <!-- <label for="">First Name:</label>
         <input v-model="first_name" type="text" />
         <label for="">Last Name:</label>
-        <input v-model="last_name" type="text" />
+        <input v-model="last_name" type="text" /> -->
         <!-- <p v-bind:title="title | capitalized">Processed value: <span v-bind:title="message | capitalized">{{ message | capitalized | shorthenString }}</span></p> -->
         <!-- <p v-bind:title="title | capitalized">Processed value: <span v-bind:title="message | capitalized">{{ computedMessage | capitalized | shorthenString }}</span></p> -->
-        <p v-bind:title="title | capitalized">Full Name: <span v-bind:title="message | capitalized">{{ computedFullName }}</span></p>
+        <!-- <p v-bind:title="title | capitalized">Full Name: <span v-bind:title="message | capitalized">{{ computedFullName }}</span></p> -->
+        <label for="">Max</label>
+        <input type="text" name="" id="" v-model="max" v-on:input="check_max">
+        <input class="form-control" type="text" v-model="input" v-on:input="check">
+        <label for="">{{ remaining }}/{{ max }}</label>
+
     </div>
 
     <script type="text/javascript">
@@ -86,10 +91,12 @@
             el:'#app',
             // data:model,
             data: {
-                message: 'Message set in data',
-                title: 'title set in title attribute',
-                first_name: '',
-                last_name: '',
+                // message: 'Message set in data',
+                // title: 'title set in title attribute',
+                // first_name: '',
+                // last_name: '',
+                input: '',
+                max: 10,
             },
             filters: {
                 capitalized: function(value){
@@ -109,6 +116,9 @@
                 },
                 computedFullName: function(){
                     return this.first_name + ' ' + this.last_name;
+                },
+                remaining: function(){
+                    return this.input.length;
                 }
             },
             methods: {
@@ -117,6 +127,12 @@
                 },
                 sayHi: function(message){
                     alert(message);
+                },
+                check: function(){
+                    this.input = this.input.substr(0,this.max);
+                },
+                check_max : function(){
+                    this.max = ( isNaN(parseInt(this.max))) ? 0 : parseInt(this.max);
                 }
             },
         });
