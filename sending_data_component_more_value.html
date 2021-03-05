@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Component</title>
+    <style>
+        .comp_root{
+            background: red; color: white;
+        }
+    </style>
+    <script text="text/javascript" src="vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <h1>Parent DIV</h1>
+        <comp v-on:relay_='allocate' v-on:click.native="alert"></comp>
+        <hr/>
+        <p>{{ content_1 }}</p>
+        <hr/>
+        <p>{{ content_2 }}</p>
+    </div>
+
+    <template id="temp">
+        <div class="comp_root">
+            <h2>Component</h2>
+            <label for="">Message 1</label>
+            <input type="text" v-on:keyup.enter="submit" v-model="message_1" />
+            <hr/>
+            <label for="">Message 2</label>
+            <input type="text" v-on:keyup.enter="submit" v-model="message_2" />
+            <button v-on:click='send'>Send Data</button>
+        </div>
+    </template>
+
+    <script type="text/javascript">
+        // Register a global component 
+        // data in component must be an anonymous function
+        Vue.component('comp', {
+            template:'#temp',
+            data: function(){
+                return{
+                    message_1: '',
+                    message_2: '',
+                }
+            },
+            props:[],
+            methods: {
+                send: function(){
+                    this.send_data();
+                },
+                submit: function(){
+                    this.send_data();
+                },
+                send_data: function(){
+                    this.$emit('relay_',this.message_1, this.message_2);
+                }
+            },
+        });
+
+        // Instantiate the vue class
+        var vm = new Vue ({
+            el:'#app',
+            data: {
+                content_1: "Content 1",
+                content_2: "content 2",
+            },
+            methods: {
+                allocate: function(message_1, message_2){
+                    this.content_1 = message_1;
+                    this.content_2 = message_2;
+                },
+                alert: function(){
+                    alert("alert");
+                }
+            }
+        });
+
+
+
+    </script>
+    
+</body>
+</html>

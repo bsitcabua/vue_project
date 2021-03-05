@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Component</title>
+    <style>
+        .comp_root{
+            background: red; color: white;
+        }
+    </style>
+    <script text="text/javascript" src="vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <h1>Parent DIV</h1>
+        <comp v-on:relay_='content=arguments[0] + content'></comp>
+        <hr/>
+        <p v-html="content">{{ content }}</p>
+    </div>
+
+    <template id="temp">
+        <div class="comp_root">
+            <h2>Component</h2>
+            <input type="text" v-on:keyup.enter="submit" v-model="message_temp" />
+            <button v-on:click='send'>Send Data</button>
+        </div>
+    </template>
+
+    <script type="text/javascript">
+        // Register a global component 
+        // data in component must be an anonymous function
+        Vue.component('comp', {
+            template:'#temp',
+            data: function(){
+                return{
+                    message: '',
+                    message_temp: '',
+                }
+            },
+            props:[],
+            methods: {
+                send: function(){
+                    if( !this.message_temp ) {
+                        return false;
+                    }
+                    this.message = this.message_temp;
+                    this.message_temp = '';
+                    this.$emit('relay_',this.message + "<br/>");
+                },
+                submit: function(){
+                    if( !this.message_temp ) {
+                        return false;
+                    }
+                    this.message = this.message_temp;
+                    this.message_temp = '';
+                    this.$emit('relay_', "<br/>" + this.message);
+                }
+            },
+        });
+
+        // Instantiate the vue class
+        var vm = new Vue ({
+            el:'#app',
+            data: {
+                content: "",
+            }
+        });
+
+
+
+    </script>
+    
+</body>
+</html>
