@@ -8,3 +8,6 @@ v-model - for input tag realtime update
 v-model.lazy - equivalent to onChange Value
 v-model.number - number type value
 v-on:input - trigger every changes input data
+
+v-model is equivalent to v-bind:value + v-on:input
+// v-bind:value='message' v-on:input='message = $event.target.value'

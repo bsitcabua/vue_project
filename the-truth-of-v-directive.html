@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Component</title>
+    <style>
+        .comp_root{
+            background: red; color: white;
+        }
+    </style>
+    <script text="text/javascript" src="vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <item label='Price' v-bind:value='price' v-on:input='price=arguments[0]'> </item>
+        <item label='Shipping' v-bind:value='shipping' v-on:input='shipping=arguments[0]'> </item>
+        <item label='Discount' v-bind:value='discount' v-on:input='discount=arguments[0]'> </item>
+        <p><span>Total: {{ total }}</span></p>
+    </div>
+
+    <template id="temp">
+        <div>
+            <label for="">{{ label }}</label>
+            <br/>
+            <input v-bind:value='value' v-on:input='send($event.target.value)' />
+        </div>
+    </template>
+
+
+    <script type="text/javascript">
+
+        Vue.component('item', {
+            template: '#temp',
+            data: function(){
+                return{}
+            },
+            props: ['label', 'value'],
+            methods: {
+                send: function(v){
+                    // Sending v to vue data
+                    this.$emit('input', v);
+                }
+            }
+        });
+
+        // Instantiate the vue class
+        var vm = new Vue ({
+            el:'#app',
+            data: {
+                price: 0,
+                shipping: 0,
+                discount: 0
+            },
+            computed: {
+                total: function(){
+                    return Number( this.price ) + Number( this.shipping ) - Number(this.discount );
+                }
+            },
+            methods: {
+            }
+        });
+    </script>
+    
+</body>
+</html>
